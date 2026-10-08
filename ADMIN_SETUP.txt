@@ -1,0 +1,24 @@
+إعداد لوحة الإدارة - نسخة Vercel المجانية
+
+1) ارفع المشروع على Vercel كالمعتاد.
+2) من Vercel افتح المشروع > Storage > Create Database > Blob.
+3) اختر Public Blob لأن أصوات الشيوخ والكتب التعليمية محتوى عام للطلاب.
+4) Vercel سيضيف BLOB_READ_WRITE_TOKEN تلقائيًا للمشروع عند إنشاء Blob وربطه بالمشروع.
+5) أعد Deploy للمشروع.
+6) في Firebase: Authentication > Sign-in method > Email/Password.
+7) افتح Firestore وأنشئ قاعدة البيانات.
+8) افتح users > مستند حساب المدير وأضف: role = admin
+9) انشر firestore.rules فقط. لم نعد نستخدم Firebase Storage.
+10) افتح /admin.html من نفس رابط Vercel.
+
+الرفع من لوحة الإدارة:
+- صوت الشيخ -> Vercel Blob
+- صورة/ PDF المتن أو التحفة -> Vercel Blob
+- فيديو YouTube -> الرابط محفوظ في Firestore
+- بيانات الكورسات والدروس -> Firestore
+- الكوينز والترتيب والرسائل والشهادات -> Firestore
+
+مهم:
+- لا تضع BLOB_READ_WRITE_TOKEN داخل HTML أو JavaScript.
+- لا تحتاج Firebase Storage ولا storage.rules.
+- Vercel Hobby مجاني ضمن الحصص المعلنة. إذا استُهلكت الحصة، يتوقف استخدام Blob حتى تتجدد الحصة، بدل إنشاء فاتورة تلقائية على Hobby.

@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signed(){ return request.auth != null; }
+    function admin(){ return signed() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'; }
+    match /users/{userId} {
+      allow create: if signed() && request.auth.uid == userId;
+      allow read: if signed() && (request.auth.uid == userId || admin());
+      allow update: if signed() && (request.auth.uid == userId || admin());
+      allow delete: if admin();
+      match /daily/{dayId} { allow read,write: if signed() && request.auth.uid == userId || admin(); }
+      match /settings/{settingId} { allow read,write: if signed() && request.auth.uid == userId || admin(); }
+      match /tajweed/{ruleId} { allow read,write: if signed() && request.auth.uid == userId || admin(); }
+      match /certificates/{id} { allow read: if signed() && (request.auth.uid==userId || admin()); allow write: if admin() || (signed() && request.auth.uid==userId); }
+      match /messages/{id} { allow read,write: if signed() && (request.auth.uid==userId || admin()); }
+      match /rewards/{id} { allow read,create: if signed() && request.auth.uid==userId; allow update,delete: if admin(); }
+    }
+    match /leaderboard/{userId} { allow read: if signed(); allow write: if admin() || (signed() && request.auth.uid==userId); }
+    match /courses/{courseId} { allow read: if true; allow create,update,delete: if admin(); match /lessons/{lessonId} { allow read: if true; allow create,update,delete: if admin(); } }
+    match /content/{contentId} { allow read: if true; allow create,update,delete: if admin(); }
+  }
+}

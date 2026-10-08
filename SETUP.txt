@@ -1,0 +1,30 @@
+النسخة النهائية - المصحف المعلم التفاعلي الشامل
+
+Firebase:
+1) Authentication > Sign-in method > فعّل Email/Password.
+2) افتح Firestore Database وأنشئ قاعدة البيانات.
+3) ضع محتوى firestore.rules في Rules وانشره.
+4) لا تستخدم Firebase Storage في هذه النسخة.
+
+Vercel:
+1) ارفع المشروع إلى Vercel.
+2) أنشئ Vercel Blob من Storage داخل مشروع Vercel.
+3) اربطه بالمشروع ليتم ضبط BLOB_READ_WRITE_TOKEN تلقائيًا.
+4) أعد Deploy.
+
+المحتوى المرفوع من Admin:
+- أصوات الشيوخ والكتب/التحف -> Vercel Blob.
+- YouTube والكورسات والدروس والبيانات -> Firestore.
+
+الملفات المهمة:
+- index.html
+- admin.html
+- leaderboard.html
+- rewards.html
+- certificates.html
+- messages.html
+- courses.html
+- library.html
+- api/upload-token.js
+- package.json
+- firestore.rules
